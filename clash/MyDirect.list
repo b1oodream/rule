@@ -1,0 +1,5 @@
+# 个人列表，默认走直连
+
+# Google Play
+- DOMAIN,services.googleapis.cn,DIRECT
+- DOMAIN-SUFFIX,xn--ngstr-lra8j.com,DIRECT #解决谷歌商店无法下载问题
