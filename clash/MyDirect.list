@@ -1,6 +1,7 @@
 # 个人列表，默认走直连
 DOMAIN-SUFFIX,09090901.xyz
 DOMAIN-SUFFIX,0080888.xyz
+DOMAIN-SUFFIX,ipv6-test.com
 
 # Google Play 解决谷歌商店无法下载问题
 DOMAIN,services.googleapis.cn
