@@ -38,7 +38,6 @@ bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,1
 [Proxy]
 
 [Remote Proxy]
-自建 v2 = https://dnoip.09090901.xyz/c/?token=f8a6fa6add006317880c437bfb4acaf2,udp=true,block-quic=true,fast-open=default,vmess-aead=true,skip-cert-verify=true,enabled=true,flexible-sni=false
 
 [Remote Filter]
 # （保留原有过滤器）
