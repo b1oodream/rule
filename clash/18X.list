@@ -1114,3 +1114,24 @@ DOMAIN-SUFFIX,trikepatrol.com
 DOMAIN-SUFFIX,tubesex.me
 DOMAIN-SUFFIX,matureporner.com
 DOMAIN-SUFFIX,fabhairypussy.com
+
+#华语与二次元核心圈 (追加)
+DOMAIN-SUFFIX,91porn.com
+DOMAIN-SUFFIX,91porny.com
+DOMAIN-SUFFIX,jiuse.cloud
+DOMAIN-SUFFIX,jiuse2.cloud
+# DOMAIN-SUFFIX,fastly.jsdelivr.net  # 特殊项：公共开源CDN，已备注禁用以免影响正规技术网站加载
+DOMAIN-SUFFIX,av01.tv
+DOMAIN-SUFFIX,netflav.com
+DOMAIN-SUFFIX,18comic.vip
+DOMAIN-SUFFIX,18comic.org
+DOMAIN-KEYWORD,18comic
+DOMAIN-KEYWORD,picacg
+DOMAIN-SUFFIX,ackcdn.net
+DOMAIN-SUFFIX,gimy.app
+DOMAIN-SUFFIX,e-hentai.org
+DOMAIN-SUFFIX,ehgt.org
+DOMAIN-SUFFIX,hath.network
+DOMAIN-SUFFIX,nhentai.net
+DOMAIN-SUFFIX,kemono.cr
+DOMAIN-SUFFIX,coomer.st
