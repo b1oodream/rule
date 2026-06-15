@@ -1,5 +1,8 @@
 #blocked-sites-in-south-korea
 
+#特殊
+DOMAIN-SUFFIX,shlii.io
+
 #中国为主 (华语圈 / 国产 / 中文社区)
 DOMAIN-SUFFIX,sexinsex.net
 DOMAIN-SUFFIX,sis001.com
