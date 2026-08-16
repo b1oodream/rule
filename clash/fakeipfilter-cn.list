@@ -119,6 +119,7 @@ alibaba.cdn.steampipe.steamcontent.com
 +.taobao.com
 +.tmall.com
 +.alicdn.com
++.aliyuncs.com
 # 拼多多
 +.pinduoduo.com
 +.yangkeduo.com
@@ -132,6 +133,7 @@ alibaba.cdn.steampipe.steamcontent.com
 +.douyincdn.com
 +.douyinvod.com
 +.douyinpic.com
++.douyincdn-tos.com
 +.snssdk.com
 +.byteimg.com
 +.ibytedtos.com
