@@ -1,2 +1,9 @@
 #BANDAI
 DOMAIN-SUFFIX,p-bandai.jp
+DOMAIN-SUFFIX,bandainamcoid.com
+#DMM
+DOMAIN-SUFFIX,dmm.co.jp
+#TV
+DOMAIN-SUFFIX,tanhuatv.site
+#UFOtable
+DOMAIN-KEYWORD,ufotable
