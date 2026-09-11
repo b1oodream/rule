@@ -2,6 +2,9 @@
 
 # 游戏
 DOMAIN-SUFFIX,gamekee.com
+#BD2
+DOMAIN-KEYWORD,bd2
+DOMAIN-SUFFIX,pmang.cloud
 
 # 漫画
 DOMAIN-SUFFIX,copymanga.site
