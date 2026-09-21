@@ -1,6 +1,10 @@
 #BANDAI
 DOMAIN-SUFFIX,p-bandai.jp
+DOMAIN-SUFFIX,p-bandai.com
+DOMAIN-SUFFIX,tamashiiweb.com
+DOMAIN-SUFFIX,tamashii.jp
 DOMAIN-SUFFIX,bandainamcoid.com
+DOMAIN-KEYWORD,bandai
 #DMM
 DOMAIN-SUFFIX,dmm.co.jp
 DOMAIN-SUFFIX,dmm.com
