@@ -4,7 +4,6 @@ DOMAIN-SUFFIX,0080888.xyz
 DOMAIN-SUFFIX,ipv6-test.com
 DOMAIN-KEYWORD,wechat
 DOMAIN-SUFFIX,gofile.io
-DOMAIN-SUFFIX,uploadgig.com
 
 # Google Play 解决谷歌商店无法下载问题
 DOMAIN,services.googleapis.cn
