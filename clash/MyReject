@@ -1,0 +1,14 @@
+DOMAIN-KEYWORD,stunserver
+DOMAIN-KEYWORD,turnserver
+DOMAIN-KEYWORD,stun.
+DOMAIN-KEYWORD,turn.
+DOMAIN-SUFFIX,relay.metered.ca
+DOMAIN-SUFFIX,meteredstun.ca
+DOMAIN-SUFFIX,stunprotocol.org
+DOMAIN,numb.viagenie.ca
+DOMAIN,iphone-stun.strato-iphone.de
+DOMAIN,relay.webwormhole.io
+DST-PORT,3478
+DST-PORT,5349
+DST-PORT,19302-19309
+DST-PORT,5350
