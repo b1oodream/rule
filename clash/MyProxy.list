@@ -46,3 +46,6 @@ DOMAIN-SUFFIX,kubernetes.io
 DOMAIN-SUFFIX,helm.sh
 DOMAIN-SUFFIX,mobatek.net
 DOMAIN-SUFFIX,linux.do
+
+#EMBY
+DOMAIN-SUFFIX,oceancloud.asia
