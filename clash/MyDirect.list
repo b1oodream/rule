@@ -27,25 +27,3 @@ DOMAIN-SUFFIX,aliapp.org
 # PS5 游戏下载及更新
 DOMAIN,sgst.prod.dl.playstation.net
 DOMAIN,gst.prod.dl.playstation.net
-
-# === 放行国内 App 看广告做任务（激励视频） ===
-# 字节跳动 / 穿山甲广告（抖音、番茄小说、各大工具类 App 最常用）
-DOMAIN-SUFFIX,pglstatp-toutiao.com
-DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
-DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
-DOMAIN-SUFFIX,snssdk.com
-DOMAIN-KEYWORD,pangolin
-DOMAIN-KEYWORD,csjplatform
-
-# 腾讯优量汇 / 广点通（微信生态、阅读/游戏类 App 常用）
-DOMAIN-SUFFIX,gdt.qq.com
-DOMAIN-SUFFIX,l.qq.com
-DOMAIN-SUFFIX,mi.gdt.qq.com
-DOMAIN-SUFFIX,v.gdt.qq.com
-
-# 百度百青藤 / 快手联盟 / 阿里妈妈
-DOMAIN-SUFFIX,mobads.baidu.com
-DOMAIN-SUFFIX,cpro.baidustatic.com
-DOMAIN-SUFFIX,e.kuaishou.com
-DOMAIN-SUFFIX,adkwai.com
-DOMAIN-SUFFIX,tanx.com
