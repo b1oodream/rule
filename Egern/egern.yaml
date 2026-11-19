@@ -1,0 +1,508 @@
+ipv6: true
+allow_external_connections: true
+vif_only: true
+block_quic: true
+close_connections_on_policy_change: true
+hide_vpn_icon: false
+geoip_db_url: https://git.io/GeoLite2-City.mmdb
+asn_db_url: https://git.io/GeoLite2-ASN.mmdb
+proxy_latency_test_url: http://connectivitycheck.gstatic.com/generate_204
+direct_latency_test_url: http://www.qq.com
+udp_latency_test_url: google.com@8.8.8.8
+compat_route: true
+include_all_networks: false
+include_apns: false
+dns:
+  bootstrap:
+  - system
+  - 223.5.5.5
+  - 223.6.6.6
+  - 119.28.28.28
+  - 119.29.29.29
+  - 180.76.76.76
+  - 2400:da00::6666
+  upstreams:
+    DIRECT-DNS:
+    - 180.76.76.76
+    - 2400:da00::6666
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    PROXY-DNS:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+    - https://cloudflare-dns.com/dns-query
+    iBL3ND-DNS:
+    - https://1.1.1.1/dns-query
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  forward:
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/TikTok.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/IBL3ND/rule/refs/heads/main/Gemini.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/MetaAI.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Gemini.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://www.naiixi.com/Extra_Crypto.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/OpenAI.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/rule/openai.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Crypto/Crypto.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Binance.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Twitter.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Telegram.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/YouTube.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Instagram.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/Cloudflare.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_proxy_list.module
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/ProxyMedia.list
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/egern/proxy.yaml
+      value: iBL3ND-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/Rabbit-Spec/Surge/refs/heads/Master/Rules/China.list
+      value: DIRECT-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/Loyalsoldier/surge-rules/release/ruleset/direct.txt
+      value: DIRECT-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module
+      value: DIRECT-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/egern/cn.yaml
+      value: DIRECT-DNS
+      disabled: false
+  - proxy_rule_set:
+      match: https://yfamilys.com/rule/DouYin.list
+      value: DIRECT-DNS
+      disabled: false
+  - domain_wildcard:
+      match: '*'
+      value: iBL3ND-DNS
+      disabled: false
+  proxy_nameservers:
+  - PROXY-DNS
+policy_groups:
+- select:
+    name: 默认代理
+    policies:
+    - 手动选择
+    - DIRECT
+    - 香港节点
+    - 日本节点
+    - 新国节点
+    - 韩国节点
+    - 美国节点
+    - 专线节点
+    - 荷兰节点
+    flatten: false
+    icon: https://iili.io/KBtLXCx.png
+    hidden: false
+
+- select:
+    name: Ai节点
+    policies:
+    - 专线节点
+    - 韩国节点
+    - 美国节点
+    - 日本节点
+    - 新国节点
+    flatten: true
+    filter: ^(?!.*(剩余|流量|套餐|到期)).*$
+    icon: https://iili.io/KjKWB5v.png
+    hidden: false
+
+- select:
+    name: 手动选择
+    policies: []
+    flatten: true
+    filter: ^(?!.*(剩余|流量|套餐|到期)).*$
+    block_quic: true
+    icon: https://iili.io/KyQjMVp.png
+    hidden: false
+
+- smart:
+    name: 香港节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇭🇰|Hong Kong|Hong|HK|HKG|香港
+    icon: https://iili.io/FaAI3Bt.png
+    hidden: false
+
+- smart:
+    name: 新国节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇸🇬|新加坡|Singapore|SG
+    icon: https://iili.io/FaRfFXn.png
+    hidden: false
+
+- smart:
+    name: 日本节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇯🇵|日本|Japan|JP
+    icon: https://iili.io/Fa5AnTb.png
+    hidden: false
+
+- smart:
+    name: 美国节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇺🇸|美国|United States|USA|US|States
+    icon: https://iili.io/FaAug7s.png
+    hidden: false
+
+- smart:
+    name: 韩国节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇰🇷|韩国|Korea|KR
+    icon: https://iili.io/Fa5Mdn1.png
+    hidden: true
+
+- smart:
+    name: 油管节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 澳门|宋仲基|俄罗斯|YT|中
+    icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/Twoandz9/Fast.png
+    hidden: true
+
+- smart:
+    name: 荷兰节点
+    policies:
+    - 手动选择
+    flatten: true
+    filter: 🇳🇱|荷兰|NLD|NL
+    hidden: true
+
+- select:
+    name: TK
+    policies:
+    - 日本节点
+    flatten: false
+    hidden: true
+
+- select:
+    name: X
+    policies:
+    - 默认代理
+    flatten: false
+    hidden: true
+
+- select:
+    name: Ai
+    policies:
+    - Ai节点
+    flatten: false
+    hidden: true
+
+- select:
+    name: TG
+    policies:
+    - 默认代理
+    flatten: false
+    hidden: true
+
+- select:
+    name: IG
+    policies:
+    - 默认代理
+    flatten: false
+    hidden: true
+
+- select:
+    name: YouTube
+    policies:
+    - 油管节点
+    flatten: false
+    hidden: true
+
+- select:
+    name: DY
+    policies:
+    - DIRECT
+    flatten: false
+    hidden: true
+
+rules:
+- rule_set:
+    match: https://yfamilys.com/rule/DouYin.list
+    policy: DY
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/TikTok.list
+    policy: TK
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/IBL3ND/rule/refs/heads/main/Gemini.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://kelee.one/Tool/Loon/Lsr/AI.lsr
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Gemini.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://www.naiixi.com/Extra_Crypto.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/OpenAI.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/rule/openai.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Crypto/Crypto.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Binance.list
+    policy: Ai
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Twitter.list
+    policy: X
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Telegram.list
+    policy: TG
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/YouTube.list
+    policy: YT
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Instagram.list
+    policy: IG
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/Cloudflare.list
+    policy: 默认代理
+    disabled: false
+- rule_set:
+    name: PROXY
+    match: https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_proxy_list.module
+    policy: 默认代理
+    disabled: false
+- rule_set:
+    match: https://yfamilys.com/rule/ProxyMedia.list
+    policy: 默认代理
+    disabled: false
+- rule_set:
+    name: DIRECT
+    match: https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_direct_list.module
+    policy: DIRECT
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/Rabbit-Spec/Surge/refs/heads/Master/Rules/China.list
+    policy: DIRECT
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax.list
+    policy: DIRECT
+    disabled: false
+- rule_set:
+    match: https://raw.githubusercontent.com/IBL3ND/rule/refs/heads/main/LAN.list
+    policy: DIRECT
+    disabled: false
+- protocol:
+    match: stun
+    policy: 默认代理
+    disabled: false
+- default:
+    policy: 默认代理
+scriptings:
+- schedule:
+    name: TestFlight监控
+    cron: '* * * * * ?'
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/TestFlight.js
+    env:
+      TF: ky5bRwMY
+    timeout: 120
+    disabled: true
+- generic:
+    name: 机场订阅小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Sub_Widget.JS
+    timeout: 120
+- generic:
+    name: 聚合热搜小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/HSW_Widget.JS
+- generic:
+    name: 万年历小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/CN_Cal.JS
+- generic:
+    name: 网络诊断雷达小组件
+    script_url: https://raw.githubusercontent.com/lylywayr/NetWork-Module/refs/heads/main/Egern/%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E9%9B%B7%E8%BE%BE/%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E9%9B%B7%E8%BE%BE.js
+- generic:
+    name: 油价查询小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Oil_Widget.JS
+- generic:
+    name: 虚拟货币小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Crypto_Widget.JS
+- generic:
+    name: 彩票开奖小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Lottery-Widget.JS
+- generic:
+    name: 数据中心小组件
+    script_url: https://raw.githubusercontent.com/magicdan3688/MyProxyScripts/refs/heads/main/ip-dch.js
+- generic:
+    name: 节日倒计时小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Holiday_Countdown.js
+- generic:
+    name: '测试网络下载速度小组件 '
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/NetSpeed_Widget.JS
+- generic:
+    name: 流媒体与AI解锁检测小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Unlock-Detection_Widget.JS
+- generic:
+    name: 联通小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Unicom_Widget.JS
+- generic:
+    name: 汇率看板小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/FX_Rate.JS
+- generic:
+    name: 限免小组件
+    script_url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/App_Store_Widget.JS
+mitm:
+  ca_p12: egern.p12
+  ca_passphrase: egern
+widgets:
+- name: 机场订阅
+  script_name: 机场订阅小组件
+- name: 测试网络下载速度
+  script_name: '测试网络下载速度小组件 '
+- name: 虚拟货币
+  script_name: 虚拟货币小组件
+- name: 油价查询
+  script_name: 油价查询小组件
+  env:
+    region: hainan/haikou
+- name: 流媒体与AI解锁检测
+  script_name: 流媒体与AI解锁检测小组件
+- name: 彩票开奖
+  script_name: 彩票开奖小组件
+- name: 节日倒计时
+  script_name: 节日倒计时小组件
+- name: 万年历
+  script_name: 万年历小组件
+- name: 数据中心
+  script_name: 数据中心小组件
+- name: 汇率组件
+  script_name: 汇率看板小组件
+- name: 限免
+  script_name: 限免小组件
+modules:
+- url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Telegram.yaml
+  env:
+    CLIENT: Turrit
+  enabled: true
+- url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/Egern-YouTube.yaml
+  compat_arguments:
+    blockUpload: 'true'
+    blockShorts: 'false'
+    autoHd: 'false'
+    blockGames: 'true'
+    blockVerticalLive: 'true'
+    jumpAhead: 'true'
+    blockStore: 'true'
+    nativeDownload: 'true'
+  enabled: true
+- name: iTunes-系列解锁合集
+  url: http://script.hub/file/_start_/https://raw.githubusercontent.com/chxm1023/Rewrite/main/iTunes.js/_end_/iTunes.sgmodule?type=qx-rewrite&target=surge-module&del=true&jqEnabled=true
+  enabled: true
+- name: Revenuecat-系列解锁合集
+  url: http://script.hub/file/_start_/https://raw.githubusercontent.com/chxm1023/Rewrite/main/Reheji.js/_end_/Reheji.sgmodule?type=qx-rewrite&target=surge-module&del=true&jqEnabled=true
+  enabled: true
+- url: https://raw.githubusercontent.com/unknowntokyo/surge-list/master/Egern/IP_Check.yaml
+  compat_arguments:
+    指定策略组: 默认代理
+  env:
+    SHOW_SPEED_TEST: 开启
+    SPEED_TEST_PACKET: 4MB
+    SPEED_TEST_TIMEOUT: 5秒
+    SHOW_IPPURE: 开启
+  enabled: true
+- url: https://raw.githubusercontent.com/IBL3ND/module/refs/heads/main/surge-loon-to-egern.yaml
+  enabled: true
+- url: https://ddgksf2013.top/module/ScriptHub.Egern.sgmodule
+  enabled: true
+- url: https://raw.githubusercontent.com/QingRex/LoonKissSurge/refs/heads/main/Surge/Official/%E2%AD%90%EF%B8%8F%20BoxJs.official.sgmodule
+  enabled: true
+- url: https://raw.githubusercontent.com/sub-store-org/Sub-Store/refs/heads/master/config/Egern.yaml
+  compat_arguments:
+    timeout: '500'
+  enabled: true
+- url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/refs/heads/main/modules/script-hub.beta.surge.sgmodule
+  enabled: true
+default_subscription_group: 默认代理
+default_proxy_group: 默认代理
