@@ -1,5 +1,5 @@
 # ================= 基础网络与底层参数 =================
-ipv6: ture
+ipv6: true
 allow_external_connections: true
 vif_only: true
 block_quic: true
