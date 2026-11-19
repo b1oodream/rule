@@ -1,0 +1,492 @@
+# ================= 基础网络与底层参数 =================
+ipv6: true
+allow_external_connections: true
+vif_only: true
+block_quic: true
+close_connections_on_policy_change: true
+hide_vpn_icon: false
+compat_route: true
+include_all_networks: false
+include_apns: false
+
+hijack_dns:
+  - '*:53'
+
+geoip_db_url: https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
+asn_db_url: https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb
+
+proxy_latency_test_url: http://connectivitycheck.gstatic.com/generate_204
+direct_latency_test_url: http://www.qq.com
+udp_latency_test_url: google.com@8.8.8.8
+
+# ================= 旁路与真实 IP 保护 =================
+bypass_tunnel_proxy:
+  - 192.168.0.0/16
+  - 10.0.0.0/8
+  - 172.16.0.0/12
+  - localhost
+  - '*.local'
+  - '*.lan'
+  - dlg.io.mi.com
+  - '*.push.apple.com'
+
+real_ip_domains:
+  - '*.battle.net'
+  - '*.blzstatic.cn'
+  - '*.battlenet.com'
+  - '*.battlenet.com.cn'
+  - '*.xboxlive.com'
+  - xbox.*.microsoft.com
+  - '*.stun.playstation.net'
+  - '*.srv.nintendo.net'
+  - '*.msftncsi.com'
+  - '*.msftconnecttest.com'
+  - msftncsi.com
+  - msftconnecttest.com
+
+# ================= DNS 分流配置 =================
+dns:
+  bootstrap:
+    - system
+    - 223.5.5.5
+    - 119.29.29.29
+  upstreams:
+    DIRECT-DNS:
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    PROXY-DNS:
+      - https://1.1.1.1/dns-query
+      - https://dns.google/dns-query
+      - https://cloudflare-dns.com/dns-query
+  forward:
+    # 私有域名与自定义直连走国内 DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/IBL3ND/rule/refs/heads/main/LAN.list
+        value: DIRECT-DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/b1oodream/rule/refs/heads/main/clash/MyDirect.list
+        value: DIRECT-DNS
+    # 抖音/拼多多/淘宝快速直连走国内 DNS
+    - domain_suffix:
+        match: douyin.com
+        value: DIRECT-DNS
+    - domain_suffix:
+        match: taobao.com
+        value: DIRECT-DNS
+    - domain_suffix:
+        match: tmall.com
+        value: DIRECT-DNS
+    - domain_suffix:
+        match: alicdn.com
+        value: DIRECT-DNS
+    # 国际核心服务走海外加密 DNS 防污染
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/OpenAI/OpenAI.list
+        value: PROXY-DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list
+        value: PROXY-DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list
+        value: PROXY-DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list
+        value: PROXY-DNS
+    # 国内总规则走国内 DNS
+    - proxy_rule_set:
+        match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax.list
+        value: DIRECT-DNS
+    # 其余未命中域名默认走海外加密 DNS
+    - domain_wildcard:
+        match: '*'
+        value: PROXY-DNS
+  proxy_nameservers:
+    - DIRECT-DNS
+  hosts:
+    iosapps.itunes.apple.com:
+      - iosapps.itunes.apple.com.download.ks-cdn.com
+  public_ip_lookup_url: https://ifconfig.me/ip
+
+# ================= 策略组配置 (已增补韩国与新加坡节点) =================
+policy_groups:
+  # ---- 主业务策略组 ----
+  - select:
+      name: 🚀 默认代理
+      policies:
+        - ♻️ 香港自动
+        - ♻️ 日本自动
+        - ♻️ 韩国自动
+        - ♻️ 新加坡自动
+        - ♻️ 美国自动
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🇺🇲 美国节点
+        - 🌐 全部节点
+        - DIRECT
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Proxy.png
+      hidden: false
+
+  - select:
+      name: 📹 YouTube
+      policies:
+        - 📺 油管节点
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🇺🇲 美国节点
+        - 🌐 全部节点
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/YouTube_01.png
+      hidden: false
+
+  - select:
+      name: 🍀 Google
+      policies:
+        - 🇺🇲 美国家宽
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🇺🇲 美国节点
+        - 🌐 全部节点
+        - DIRECT
+        - 🚀 默认代理
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Google.png
+      hidden: false
+
+  - select:
+      name: 🤖 AI服务
+      policies:
+        - 🇺🇲 美国家宽
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🇺🇲 美国节点
+        - 🌐 全部节点
+        - DIRECT
+        - 🚀 默认代理
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/ChatGPT7.png
+      hidden: false
+
+  - select:
+      name: 🛑 广告拦截
+      policies:
+        - DIRECT
+        - REJECT
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Egern_00.png
+      hidden: false
+
+  - select:
+      name: 🎮 Game
+      policies:
+        - DIRECT
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🚀 默认代理
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/Twoandz9/Fast.png
+      hidden: false
+
+  - select:
+      name: 🐟 漏网之鱼
+      policies:
+        - 🚀 默认代理
+        - 🇭🇰 香港节点
+        - 🇯🇵 日本节点
+        - 🇰🇷 韩国节点
+        - 🇸🇬 新加坡节点
+        - 🇺🇲 美国节点
+        - 🌐 全部节点
+        - DIRECT
+      flatten: false
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/Egern_00.png
+      hidden: false
+
+  # ---- 地区手动选择组 ----
+  - select:
+      name: 🇭🇰 香港节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?=.*(港|HK|(?i)Hong))^((?!(实验性|台|日|韩|新|深|美|▶YT)).)*$
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/HK_03.png
+      hidden: false
+
+  - select:
+      name: 🇯🇵 日本节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?=.*(日|JP|(?i)Japan))^((?!(实验性|家宽|港|台|韩|新|美|尼|▶YT)).)*$
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/JP_02.png
+      hidden: false
+
+  - select:
+      name: 🇰🇷 韩国节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?=.*(韩|KR|(?i)Korea))^((?!(实验性|家宽|港|台|日|新|美|▶YT)).)*$
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/KR_02.png
+      hidden: false
+
+  - select:
+      name: 🇸🇬 新加坡节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?=.*(新|狮|SG|(?i)Singapore))^((?!(实验性|家宽|港|台|日|韩|美|新西兰|▶YT)).)*$
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/SG_02.png
+      hidden: false
+
+  - select:
+      name: 🇺🇲 美国节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?=.*(美|US|(?i)States|America))^((?!(实验性|家宽|港|台|韩|新|日|宋仲基|▶YT)).)*$
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/US_02.png
+      hidden: false
+
+  - select:
+      name: 🇺🇲 美国家宽
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?i)家宽
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/flag/US_02.png
+      hidden: false
+
+  - select:
+      name: 📺 油管节点
+      policies:
+        - 🌐 全部节点
+      flatten: true
+      filter: (?i)澳门|朝鲜|俄|中|宋仲基|俄罗斯|▶YT|(?i)MO|(?i)RU
+      icon: https://raw.githubusercontent.com/fmz200/wool_scripts/main/icons/apps/YouTube_01.png
+      hidden: false
+
+
+  # ---- 全部节点汇总 & 外部订阅入口 ----
+  - select:
+      name: 🌐 全部节点
+      policies:
+        - 我的机场
+      flatten: true
+      filter: ^(?!.*(剩余|流量|套餐|到期|重置|官网|网址)).*$
+      hidden: false
+
+  - external:
+      name: 我的机场
+      type: select
+      urls:
+        - 链接
+      hidden: true
+
+# ================= 分流规则 (严格遵循 OpenClash 十段式顺序) =================
+rules:
+  # 🏠 ① 局域网 IP 与私有域名最先放行
+  - rule_set:
+      name: 局域网与私有域名
+      match: https://raw.githubusercontent.com/IBL3ND/rule/refs/heads/main/LAN.list
+      policy: DIRECT
+
+  # ⚡ 抖音、拼多多、淘宝天猫快速直连
+  - domain_suffix:
+      match: douyin.com
+      policy: DIRECT
+  - rule_set:
+      name: 抖音分流
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/DouYin/DouYin.list
+      policy: DIRECT
+  - rule_set:
+      name: 拼多多分流
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pinduoduo/Pinduoduo.list
+      policy: DIRECT
+  - domain_suffix:
+      match: taobao.com
+      policy: DIRECT
+  - domain_suffix:
+      match: tmall.com
+      policy: DIRECT
+  - domain_suffix:
+      match: alicdn.com
+      policy: DIRECT
+  - domain_suffix:
+      match: tbcdn.cn
+      policy: DIRECT
+  - domain_suffix:
+      match: tbcache.com
+      policy: DIRECT
+
+  # 🛑 ② 广告拦截 (先行硬拦截海外 Google Ads 防超时，其余走 🛑 广告拦截 策略组)
+  - domain_suffix:
+      match: clients6.google.com
+      policy: REJECT
+  - domain_suffix:
+      match: doubleclick.net
+      policy: REJECT
+  - domain_suffix:
+      match: googleadservices.com
+      policy: REJECT
+  - domain_suffix:
+      match: googlesyndication.com
+      policy: REJECT
+  - rule_set:
+      name: 广告拦截合集
+      match: https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/rejectAd.list
+      policy: 🛑 广告拦截
+
+  # 🔧 ③ 用户自定义强制规则
+  - domain:
+      match: dl.bd2.pmang.cloud
+      policy: 🇺🇲 美国节点
+  - rule_set:
+      name: 个人自定义直连
+      match: https://raw.githubusercontent.com/b1oodream/rule/refs/heads/main/clash/MyDirect.list
+      policy: DIRECT
+  - rule_set:
+      name: 个人自定义代理
+      match: https://raw.githubusercontent.com/b1oodream/rule/refs/heads/main/clash/MyProxy.list
+      policy: 🚀 默认代理
+
+  # 🏦 ④ 关键服务直连 (银行 / 微软 / 苹果 / 谷歌中国)
+  - rule_set:
+      name: 中国银行服务
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaBank/ChinaBank.list
+      policy: DIRECT
+  - rule_set:
+      name: 微软中国服务
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list
+      policy: DIRECT
+  - rule_set:
+      name: 苹果中国服务
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple.list
+      policy: DIRECT
+  - rule_set:
+      name: 谷歌中国服务
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GoogleCN/GoogleCN.list
+      policy: DIRECT
+
+  # 🎮 ⑤ 游戏服务与平台分流
+  - rule_set:
+      name: 游戏平台分流
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Game/Game.list
+      policy: 🎮 Game
+
+  # 🤖 ⑥ 国际专属服务
+  - rule_set:
+      name: AI服务合集
+      match: https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AI.list
+      policy: 🤖 AI服务
+  - rule_set:
+      name: 加密货币
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Crypto/Crypto.list
+      policy: 🚀 默认代理
+  - rule_set:
+      name: GitHub
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GitHub/GitHub.list
+      policy: 🚀 默认代理
+  - rule_set:
+      name: YouTube
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list
+      policy: 📹 YouTube
+  - rule_set:
+      name: Google
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list
+      policy: 🍀 Google
+  - rule_set:
+      name: OneDrive
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/OneDrive/OneDrive.list
+      policy: 🚀 默认代理
+  - rule_set:
+      name: PayPal
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PayPal/PayPal.list
+      policy: 🚀 默认代理
+  - rule_set:
+      name: Twitch
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list
+      policy: 🇺🇲 美国节点
+
+  # 🎬 媒体分流
+  - rule_set:
+      name: 国内媒体
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMedia/ChinaMedia.list
+      policy: DIRECT
+  - rule_set:
+      name: 国际流媒体
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GlobalMedia/GlobalMedia.list
+      policy: 🇺🇲 美国节点
+
+  # 📲 ⑦ 通讯软件
+  - rule_set:
+      name: Telegram
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list
+      policy: 🚀 默认代理
+
+  # 🍎 ⑧ Apple 兜底服务
+  - rule_set:
+      name: Apple全量
+      match: https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/AppleAll.list
+      policy: DIRECT
+
+  # 🌍 ⑨ 国内外域名与 IP 兜底分流
+  - rule_set:
+      name: 海外代理列表
+      match: https://raw.githubusercontent.com/GMOogway/shadowrocket-rules/master/sr_proxy_list.module
+      policy: 🚀 默认代理
+  - rule_set:
+      name: 大陆全量域名与IP
+      match: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax.list
+      policy: DIRECT
+  - rule_set:
+      name: 国内GeoIP
+      match: https://raw.githubusercontent.com/fmz200/wool_scripts/main/Loon/rule/GeoIP_CN.list
+      policy: DIRECT
+
+  # 🐟 ⑩ 最终匹配
+  - default:
+      policy: 🐟 漏网之鱼
+
+# ================= 重写与精简模块 (保留实用基础组件) =================
+url_rewrites:
+  - match: ^https?:\/\/(www.)?(g|google)\.cn
+    location: https://www.google.com
+    status_code: 302
+
+mitm:
+  ca_p12: egern.p12
+  ca_passphrase: egern
+
+modules:
+  - name: 'Script Hub: 重写 & 规则集转换'
+    url: https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/refs/heads/main/modules/script-hub.beta.egern.yaml
+    enabled: true
+  - name: Sub-Store
+    url: https://raw.githubusercontent.com/sub-store-org/Sub-Store/refs/heads/master/config/Egern.yaml
+    enabled: true
+  - name: BoxJs
+    url: https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.surge.sgmodule
+    enabled: true
+  - url: https://raw.githubusercontent.com/unknowntokyo/surge-list/master/Egern/IP_Check.yaml
+    compat_arguments:
+      指定策略组: 🚀 默认代理
+    env:
+      SHOW_SPEED_TEST: 开启
+      SPEED_TEST_PACKET: 4MB
+      SPEED_TEST_TIMEOUT: 5秒
+      SHOW_IPPURE: 开启
+    enabled: true
+
+default_subscription_group: 🌐 全部节点
+default_proxy_group: 🚀 默认代理
