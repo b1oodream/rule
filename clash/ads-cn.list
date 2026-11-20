@@ -1,21 +1,22 @@
-# === 放行国内 App 看广告做任务（激励视频） ===
-# 字节跳动 / 穿山甲广告（抖音、番茄小说、各大工具类 App 最常用）
+# === 国内 App 激励视频广告放行 ===
+
+# 字节跳动 / 穿山甲
 DOMAIN-SUFFIX,pglstatp-toutiao.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao.com
 DOMAIN-SUFFIX,pangolin-sdk-toutiao-b.com
-DOMAIN-SUFFIX,snssdk.com
 DOMAIN-KEYWORD,pangolin
-DOMAIN-KEYWORD,csjplatform
 
-# 腾讯优量汇 / 广点通（微信生态、阅读/游戏类 App 常用）
+# 腾讯优量汇 / 广点通
 DOMAIN-SUFFIX,gdt.qq.com
 DOMAIN-SUFFIX,l.qq.com
-DOMAIN-SUFFIX,mi.gdt.qq.com
-DOMAIN-SUFFIX,v.gdt.qq.com
 
-# 百度百青藤 / 快手联盟 / 阿里妈妈
-DOMAIN-SUFFIX,mobads.baidu.com
-DOMAIN-SUFFIX,cpro.baidustatic.com
-DOMAIN-SUFFIX,e.kuaishou.com
+# 百度百青藤
+DOMAIN,mobads.baidu.com
+DOMAIN,cpro.baidustatic.com
+
+# 快手广告联盟
+DOMAIN,e.kuaishou.com
 DOMAIN-SUFFIX,adkwai.com
+
+# 阿里妈妈
 DOMAIN-SUFFIX,tanx.com
