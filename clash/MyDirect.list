@@ -28,3 +28,7 @@ DOMAIN-SUFFIX,aliapp.org
 # PS5 游戏下载及更新
 DOMAIN,sgst.prod.dl.playstation.net
 DOMAIN,gst.prod.dl.playstation.net
+
+#小红书
+DOMAIN-SUFFIX,xhscdn.com
+DOMAIN-SUFFIX,xiaohongshu.com
