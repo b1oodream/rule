@@ -20,3 +20,13 @@ DOMAIN-SUFFIX,adkwai.com
 
 # 阿里妈妈
 DOMAIN-SUFFIX,tanx.com
+
+#国内平台
+DOMAIN-SUFFIX,youzan.com
+DOMAIN-SUFFIX,yzcdn.com
+DOMAIN-SUFFIX,yzcdn.cn
+DOMAIN-SUFFIX,jd.com
+DOMAIN-SUFFIX,360buyimg.com
+DOMAIN-SUFFIX,alicdn.com
+DOMAIN-SUFFIX,tbcdn.cn
+DOMAIN-SUFFIX,tbcache.com
