@@ -32,3 +32,15 @@ DOMAIN,gst.prod.dl.playstation.net
 #小红书
 DOMAIN-SUFFIX,xhscdn.com
 DOMAIN-SUFFIX,xiaohongshu.com
+
+#国内平台
+DOMAIN-SUFFIX,taobao.com
+DOMAIN-SUFFIX,tmall.com
+DOMAIN-SUFFIX,youzan.com
+DOMAIN-SUFFIX,yzcdn.com
+DOMAIN-SUFFIX,yzcdn.cn
+DOMAIN-SUFFIX,jd.com
+DOMAIN-SUFFIX,360buyimg.com
+DOMAIN-SUFFIX,alicdn.com
+DOMAIN-SUFFIX,tbcdn.cn
+DOMAIN-SUFFIX,tbcache.com
